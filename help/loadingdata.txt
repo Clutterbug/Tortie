@@ -1,0 +1,4 @@
+load data local infile 'uniq.csv' into table tblUniq fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+(uniqName, uniqCity, uniqComments)

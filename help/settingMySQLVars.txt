@@ -1,0 +1,22 @@
+If you need to set a system variable for the MySQL server, it's done by adding a name-value pair in a file called my.cnf.  MySQL will look inside the /etc for the my.cnf file.  This file does not exist by default.  The following steps describe how to create the my.cnf file used to configure MySQL.
+
+step 1. log in to mysql.  Fire up the terminal and enter:
+$MYSQL -u root -p
+
+Step 2. view MYSQL's current values:
+show variables;
+check the value of the variable you want to change
+
+step 3. Create  /etc/my.cnf:
+sudo vim /etc/my.cnf
+
+and add (for example):
+[mysqld]
+ft_min_word_len=3
+
+to the file and save.
+
+Step 4: Restart MYSQL servers using MAMP
+
+Step 5: Login to MYSQL again and check the variable has changed
+

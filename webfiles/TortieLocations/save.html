@@ -1,0 +1,100 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Tortie Locations</title>
+
+    <script type="text/javascript" src="wpscripts/jspngfix.js"></script>
+
+    <link rel="stylesheet" href="wpscripts/wpstyles.css" type="text/css"><script type="text/javascript">var blankSrc = "wpscripts/blank.gif";</script>
+
+    <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZJWJBInASA3Caxwa3tI8uR4dJRHX4J10&sensor=false"></script>
+    
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    <script type="text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery.Validate/1.6/jQuery.Validate.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-darkness/jquery-ui.css" />
+<style>
+    .gBubble
+    {
+        color:black;
+        font-family:Tahoma, Geneva, sans-serif;
+        font-size:12px;    
+    }
+</style>
+<script>
+    var map;
+    var coords = new Object();
+    var markersArray = [];
+    coords.lat = 44.856051;
+    coords.lng = -93.242539;
+    
+    $(document).ready(function() 
+    {
+        
+        $( "#map_container" ).dialog({
+            autoOpen:false,
+            width: 555,
+            height: 400,
+            resizeStop: function(event, ui) {google.maps.event.trigger(map, 'resize')  },
+            open: function(event, ui) {google.maps.event.trigger(map, 'resize'); }      
+        });  
+        
+        $('.MapButton').click(function() {
+            showMap(coords.lat, coords.lng);
+        });
+        
+        function showMap(lat,lng) {
+            initialize();
+            $( "#map_container" ).dialog( "open" );
+            map.setCenter(new google.maps.LatLng(lat, lng), 10);
+            plotPoint(coords.lat,coords.lng,'Mall of America','<span class="gBubble"><b>Mall of America</b><br>60 East Brodway<br>Bloomington, MN 55425</span>');
+            return false;
+        }
+
+         
+        //$(  "input:submit,input:button, a, button", "#controls" ).button();
+ });
+
+    function plotPoint(srcLat,srcLon,title,popUpContent,markerIcon)
+    {
+            var myLatlng = new google.maps.LatLng(srcLat, srcLon);            
+            var marker = new google.maps.Marker({
+                  position: myLatlng, 
+                  map: map, 
+                  title:title,
+                  icon: markerIcon
+              });
+              markersArray.push(marker);
+            var infowindow = new google.maps.InfoWindow({
+                content: popUpContent
+            });
+              google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(map,marker);
+            });                                          
+    }
+    function initialize() 
+    {      
+    
+        var latlng = new google.maps.LatLng(coords.lat, coords.lng);
+        var myOptions = {
+          zoom: 10,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+       map = new google.maps.Map(document.getElementById("map_canvas"),  myOptions);                         
+    }        
+</script>
+</head>
+
+<body>
+    <div id="map_container" title="Location Map">    
+        <div id="map_canvas" style="width:100%;height:100%;"></div>
+    </div>
+    
+    <div id="controls">
+        <input type="button" name="showMap" value="Show Map" class="MapButton" />
+    </div>    
+</body>
+</html>

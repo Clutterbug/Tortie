@@ -1,0 +1,28 @@
+.stopbutton {
+    border: none !important;
+    font-size:20px !important;
+    color: #FFFFFF;
+    background:none !important;
+    background: #FF0000 !important;
+    font-family: 'MavenProRegular' !important;
+    border-radius:5px;
+    padding:15px;
+    cursor: pointer;
+}
+
+.callbutton {
+    border: none !important;
+    font-size:20px !important;
+    color: #FFFFFF;
+    background:none !important;
+    background: #68228B !important;
+    font-family: 'MavenProRegular' !important;
+    border-radius:5px;
+    padding:15px;
+    cursor: pointer;
+}
+
+.callbutton input:hover
+{ 
+background-color:#864EA2;
+}

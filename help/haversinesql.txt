@@ -1,0 +1,1 @@
+SELECT ( 6371 * acos(sin( radians(lat1) ) * sin( radians( lat2 ) ) +cos( radians(lat1) ) * cos( radians( lat2 ) ) * cos( radians( lon2 ) - radians(lon1) ) ) ) ;

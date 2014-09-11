@@ -1,0 +1,8 @@
+Subject: Subjecy
+FROM: From_name
+To: to@to.com
+Content-Type: text/html; charset=us-ascii
+
+<html>
+<pre>
+<font size=3 color=blue><b>Message Body</b></font>

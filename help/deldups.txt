@@ -1,0 +1,28 @@
+USE tortie_co_uk_db;
+
+DROP PROCEDURE IF EXISTS delDupsProc;
+
+delimiter //
+
+CREATE PROCEDURE delDupsProc ()
+BEGIN
+select count(*) as dups, TranId
+from landRegLoadTb
+group by TranId
+having dups > 1
+
+
+	DELETE FROM landRegTb l
+	WHERE l.TranId = (select SUBSTRING(ll.TranId FROM 2 FOR 36)
+			  from landRegLoadTb ll
+			  where ll.RecordStatus = "D");  	
+
+
+
+SELECT * FROM landRegLoadTb ll
+		WHERE 	l.TranId = SUBSTRING(ll.TranId FROM 2 FOR 36)
+		AND	ll.RecordStatus = "D"
+	 
+END;
+//
+delimiter ;

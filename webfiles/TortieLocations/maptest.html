@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { width: 760px;height: 400px; }
+      .testButton {background-position:0px 0px;color:red; font-size:10px; text-decoration:none;display:inline-block; background-color:transparent ;border:1px solid;padding:0; width : 60px; height :15px}
+      .testButton:hover {background-position:0px 0px;color:red; font-size:10px;text-decoration:none;display:inline-block; background-color:transparent ;border:none 0px;padding:0; width : 60px; height :15px}
+      .testButton:active {background-position:0px 0px;color:red; font-size:10px;text-decoration:none;display:inline-block; background-color:transparent ;border:none 0px;padding:0; width : 60px; height :15px}
+    </style>
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    <script type="text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery.Validate/1.6/jQuery.Validate.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZJWJBInASA3Caxwa3tI8uR4dJRHX4J10&sensor=false"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+   
+    </script>
+  </head>
+  <body onload="initialize()">
+<script type="text/javascript">
+  function initialize() {
+    var location = new google.maps.LatLng(37.437412,-122.15641);
+    var myOptions = {
+      zoom:13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: location
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    google.maps.event.addListener(map, 'click', function(event) {
+        var $dialog = $("#dialog").dialog({
+            autoOpen: false,
+            title: 'Dialog Title',
+            modal: true
+        });
+        $dialog.dialog('open');
+    });
+  }
+ </script>
+
+<div id="dialog"></div>
+<div id="map_canvas" style="border: 1px solid black; position:absolute; width:398px; height:398px"></div>
+<input type="button" value="load script + map" onclick="loadScript();"/>
+<button class="testButton">test</button>
+</body>
+</html>

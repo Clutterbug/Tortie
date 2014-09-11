@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asynchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script type="text/javascript" src="wpscripts/jspngfix.js"></script>
+
+    <link rel="stylesheet" href="wpscripts/wpstyles.css" type="text/css"><script type="text/javascript">var blankSrc = "wpscripts/blank.gif";</script>
+
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    <script type="text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery.Validate/1.6/jQuery.Validate.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZJWJBInASA3Caxwa3tI8uR4dJRHX4J10&sensor=false"></script>  
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    
+    <style type="text/css">
+        html { height: 100% }
+        body { height: 100%; margin: 0; padding: 0 }
+        #map-canvas { width: 760px;height: 400px; }
+        .testButton {background-position:0px 0px;color:red; font-size:10px; text-decoration:none;display:inline-block; background-color:transparent ;border:1px solid;padding:0; width : 60px; height :15px}
+        .testButton:hover {background-position:0px 0px;color:red; font-size:10px;text-decoration:none;display:inline-block; background-color:transparent ;border:none 0px;padding:0; width : 60px; height :15px}
+        .testButton:active {background-position:0px 0px;color:red; font-size:10px;text-decoration:none;display:inline-block; background-color:transparent ;border:none 0px;padding:0; width : 60px; height :15px}
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("div#test").dialog ({
+                autoOpen : false,
+                width: 350,
+                height: 450,
+                modal: true,
+                buttons : [{
+                    text: "OK",
+                    "class" : "OKButton",
+                    click : function() { 
+                        $("div#test").dialog ("close");
+                    }
+                }]
+             
+            });
+            //Bring up a test modal 
+            $('.testButton').click(function() {
+
+                var NewDialog = $('<div id="test"></div>');
+                // bring up the test modal
+                NewDialog.dialog({
+                    width: 350,
+                    height: 450,
+                    modal: true,
+                    open: function () {
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDZJWJBInASA3Caxwa3tI8uR4dJRHX4J10&sensor=false' + 'callback=initialize';
+                        $("div#test").appendChild(script);           
+                    },
+                    buttons : [{
+                        text: "OK",
+                        "class" : "OKButton",
+                        click : function() { 
+                            $("div#test").dialog ("close");
+                        }
+                    }]
+                });
+            });
+        });
+        
+        function initialize() {
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(-34.397, 150.644),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+        }
+
+        //function loadScript() {
+        //    var script = document.createElement('script');
+        //    script.type = 'text/javascript';
+        //    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
+        //    document.body.appendChild(script);
+        //}
+
+        //window.onload = loadScript;
+        
+        
+        
+        
+    </script>
+  </head>
+  
+    
+  <body onload="">     
+    <div id="map-canvas" style="width: 500px; height: 300px"></div>
+    <input type="button" value="load script + map" onclick="loadScript();"/>
+    <button class="testButton">test</button>
+  </body>
+</html>
